@@ -74,10 +74,7 @@ $controllerCode = <<<PHP
 
 namespace Fylari\Modules\\$moduleName;
 
-use Fylari\Core\Controller;
-use Fylari\Core\Entity;
-use Fylari\Core\Field;
-use Fylari\Core\DB;
+use core\DB;use core\Entity;use core\Field;
 
 class {$moduleName}Controller extends Controller
 {
@@ -115,7 +112,7 @@ file_put_contents($controllerFile, $controllerCode);
 $routesCode = <<<PHP
 <?php
 
-use Fylari\Core\Router;
+use core\Router;
 
 /** @var Router \$router */
 

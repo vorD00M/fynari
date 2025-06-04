@@ -1,6 +1,6 @@
 <?php
 
-namespace Fylari\Core;
+namespace core;
 
 class Field
 {
