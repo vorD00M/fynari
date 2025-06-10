@@ -1,14 +1,11 @@
 <?php
 
-namespace core;
+namespace Fylari\Core;
 
 class Router
 {
     private array $routes = [
-        'GET' => [],
-        'POST' => [],
-        'PUT' => [],
-        'DELETE' => [],
+        'GET' => [], 'POST' => [], 'PUT' => [], 'DELETE' => []
     ];
 
     public function get(string $uri, array $action)    { $this->addRoute('GET', $uri, $action); }
@@ -19,8 +16,7 @@ class Router
     public function addRoute(string $method, string $uri, array $action): void
     {
         $pattern = preg_replace('#\{([\w]+)\}#', '([^/]+)', $uri);
-        $pattern = "#^" . $pattern . "$#";
-        $this->routes[$method][$pattern] = $action;
+        $this->routes[$method]["#^$pattern$#"] = $action;
     }
 
     public function registerModule(string $name, string $controller): void
@@ -40,7 +36,6 @@ class Router
         $uri = parse_url($uri, PHP_URL_PATH);
         $method = strtoupper($method);
 
-        // ⏳ Lazy-load маршруты модуля
         $this->lazyLoadModuleRoutes($uri);
 
         foreach ($this->routes[$method] as $pattern => $action) {
@@ -48,8 +43,7 @@ class Router
                 array_shift($matches);
                 [$controller, $methodName] = $action;
                 if (class_exists($controller)) {
-                    $instance = new $controller();
-                    call_user_func_array([$instance, $methodName], $matches);
+                    call_user_func_array([new $controller(), $methodName], $matches);
                     return;
                 }
                 http_response_code(500);
@@ -71,18 +65,28 @@ class Router
 
         $moduleDir = __DIR__ . "/../Modules/$moduleName";
         $controllerClass = "Fylari\\Modules\\$moduleName\\{$moduleName}Controller";
-
+        //echo $moduleDir; var_dump(file_exists("$moduleDir/{$moduleName}Controller.php"));
         if (!class_exists($controllerClass) && file_exists("$moduleDir/{$moduleName}Controller.php")) {
             require_once "$moduleDir/{$moduleName}Controller.php";
         }
+        //var_dump(class_exists($controllerClass));die();
+        // 🧠 Получаем тип модуля из БД
+        $module = \Fylari\Core\DB::table('modules')->where('code', '=', strtolower($moduleName))->first();
 
-        if (class_exists($controllerClass)) {
-            $this->registerModule($moduleName, $controllerClass);
+        // ✅ Если модуль найден и тип "entity", подключаем CRUD
+        if ($module && $module['type'] === 'entity') {
+            if (class_exists($controllerClass)) {
+                $this->registerModule($moduleName, $controllerClass);
+            }
         }
 
+        // ✅ Подключаем кастомные маршруты всегда
         $routeFile = "$moduleDir/Routes.php";
         if (file_exists($routeFile)) {
+            /** @var Router $router */
+            $router = $this;
             require_once $routeFile;
         }
     }
+
 }

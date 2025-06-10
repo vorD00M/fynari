@@ -10,6 +10,7 @@ class ComposerStaticInita24d50019dd1cd02b44f16bc95f56d70
         'F' => 
         array (
             'Fylari\\' => 7,
+            'Firebase\\JWT\\' => 13,
         ),
     );
 
@@ -17,6 +18,10 @@ class ComposerStaticInita24d50019dd1cd02b44f16bc95f56d70
         'Fylari\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
     );
 

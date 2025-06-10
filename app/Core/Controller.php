@@ -1,6 +1,6 @@
 <?php
 
-namespace core;
+namespace Fylari\Core;
 
 class Controller
 {

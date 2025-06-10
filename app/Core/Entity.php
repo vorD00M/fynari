@@ -1,6 +1,6 @@
 <?php
 
-namespace core;
+namespace Fylari\Core;
 
 class Entity
 {
@@ -50,9 +50,7 @@ class Entity
 
     public function find(int $id): ?array
     {
-        return DB::table('entities')
-            ->where('id', '=', $id)
-            ->first();
+        return DB::table('entities')->where('id', '=', $id)->first();
     }
 
     public function all(int $moduleId): array

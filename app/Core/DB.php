@@ -1,6 +1,6 @@
 <?php
 
-namespace core;
+namespace Fylari\Core;
 
 use PDO;
 
@@ -13,7 +13,7 @@ class DB
 
     public function __construct()
     {
-        $this->pdo = require __DIR__ . '/../../../config/database.php';
+        $this->pdo = require __DIR__ . '/../../config/database.php';
     }
 
     public static function table(string $table): self

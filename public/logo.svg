@@ -1,0 +1,22 @@
+<svg width="320" height="300" viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">
+    <!-- Птица с лампочкой -->
+    <g>
+        <!-- Крыло -->
+        <path d="M100 100 C 80 60, 160 50, 180 90 C 185 95, 190 105, 190 110 C 175 105, 160 115, 145 125" fill="#7B5EFF"/>
+
+        <!-- Тело птицы / лампочка -->
+        <path d="M140 130 C 135 110, 165 110, 160 130 C 158 140, 150 150, 150 160 L 150 170 L 145 170 L 145 160 C 145 150, 142 140, 140 130 Z" fill="#F2994A"/>
+
+        <!-- Хвост -->
+        <path d="M110 120 C 90 125, 95 140, 110 135 L 130 130" fill="#7B5EFF"/>
+
+        <!-- Глаз -->
+        <circle cx="170" cy="95" r="3" fill="#333"/>
+    </g>
+
+    <!-- Текст FYNARI -->
+    <text x="80" y="240" font-family="Segoe UI, sans-serif" font-size="28" fill="#2E2E2E" font-weight="600">FYNARI</text>
+
+    <!-- Слоган -->
+    <text x="75" y="265" font-family="Segoe UI, sans-serif" font-size="14" fill="#888">crm по твоим правилам</text>
+</svg>

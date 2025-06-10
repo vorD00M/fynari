@@ -3,5 +3,8 @@
     "psr-4": {
       "Fylari\\": "app/"
     }
+  },
+  "require": {
+    "firebase/php-jwt": "^6.11"
   }
 }
